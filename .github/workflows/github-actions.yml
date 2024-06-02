@@ -22,22 +22,18 @@ jobs:
             -   name: Verify JDK installation
                 run: java -version
 
-#            -   name: Cache Gradle packages
-#                uses: actions/cache@v3
-#                with:
-#                    path: |
-#                        ~/.gradle/caches
-#                        ~/.gradle/wrapper
-#                    key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-#                    restore-keys: |
-#                        ${{ runner.os }}-gradle
-#
-#            -   name: Build with Gradle
-#                run: ./gradlew build -Djasypt.encryptor.password=potatowoong
-#                env:
-#                    JAVA_HOME: ~/.jabba/jdk/openjdk@1.17.0
-#
-#            -   name: Run tests
-#                run: ./gradlew test -Djasypt.encryptor.password=potatowoong
-#                env:
-#                    JAVA_HOME: ~/.jabba/jdk/openjdk@1.17.0
+            #            -   name: Cache Gradle packages
+            #                uses: actions/cache@v3
+            #                with:
+            #                    path: |
+            #                        ~/.gradle/caches
+            #                        ~/.gradle/wrapper
+            #                    key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+            #                    restore-keys: |
+            #                        ${{ runner.os }}-gradle
+            #
+            -   name: Build with Gradle
+                run: ./gradlew build -Djasypt.encryptor.password=potatowoong
+
+            -   name: Run tests
+                run: ./gradlew test -Djasypt.encryptor.password=potatowoong
