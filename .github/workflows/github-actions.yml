@@ -12,53 +12,32 @@ jobs:
             -   name: Checkout code
                 uses: actions/checkout@v3
 
-            -   name: Set up cache for JDK
-                id: cache-jdk
-                uses: actions/cache@v3
-                with:
-                    path: ~/.jabba/jdk
-                    key: ${{ runner.os }}-jdk17-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-                    restore-keys: |
-                        ${{ runner.os }}-jdk17-
-                            
             -   name: Set up JDK 17
-                if: steps.cache-jdk.outputs.cache-hit != 'true'
-                run: |
-                    curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | bash
-                    . ~/.jabba/jabba.sh
-                    jabba install openjdk@1.17.0
-                    jabba use openjdk@1.17.0
-                env:
-                    JAVA_HOME: ~/.jabba/jdk/openjdk@1.17.0
-
-            -   name: Set up JDK 17 environment
-                if: steps.cache-jdk.outputs.cache-hit == 'true'
-                run: |
-                    echo "JDK 17 is already cached"
-                env:
-                    JAVA_HOME: ~/.jabba/jdk/openjdk@1.17.0
+                uses: actions/setup-java@v3
+                with:
+                    java-version: '17'
+                    distribution: 'temurin'
+                    cache: gradle
 
             -   name: Verify JDK installation
                 run: java -version
-                env:
-                    JAVA_HOME: ~/.jabba/jdk/openjdk@1.17.0
 
-            -   name: Cache Gradle packages
-                uses: actions/cache@v3
-                with:
-                    path: |
-                        ~/.gradle/caches
-                        ~/.gradle/wrapper
-                    key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-                    restore-keys: |
-                        ${{ runner.os }}-gradle
-
-            -   name: Build with Gradle
-                run: ./gradlew build -Djasypt.encryptor.password=potatowoong
-                env:
-                    JAVA_HOME: ~/.jabba/jdk/openjdk@1.17.0
-
-            -   name: Run tests
-                run: ./gradlew test -Djasypt.encryptor.password=potatowoong
-                env:
-                    JAVA_HOME: ~/.jabba/jdk/openjdk@1.17.0
+#            -   name: Cache Gradle packages
+#                uses: actions/cache@v3
+#                with:
+#                    path: |
+#                        ~/.gradle/caches
+#                        ~/.gradle/wrapper
+#                    key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+#                    restore-keys: |
+#                        ${{ runner.os }}-gradle
+#
+#            -   name: Build with Gradle
+#                run: ./gradlew build -Djasypt.encryptor.password=potatowoong
+#                env:
+#                    JAVA_HOME: ~/.jabba/jdk/openjdk@1.17.0
+#
+#            -   name: Run tests
+#                run: ./gradlew test -Djasypt.encryptor.password=potatowoong
+#                env:
+#                    JAVA_HOME: ~/.jabba/jdk/openjdk@1.17.0
