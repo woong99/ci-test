@@ -67,7 +67,7 @@ jobs:
 
             -   name: Add Github Actions IP to Security group
                 run: |
-                    aws ec2 authorize-security-group-ingress --group-name ${{ secrets.AWS_SECURITY_GROUP_NAME }} --protocol tcp --port 22 -cidr ${{steps.ip.outputs.ipv4}}/32
+                    aws ec2 authorize-security-group-ingress --group-name ${{ secrets.AWS_SECURITY_GROUP_NAME }} --protocol tcp --port 22 --cidr ${{steps.ip.outputs.ipv4}}/32
 
             -   name: Deploy jar to EC2
                 uses: appleboy/ssh-action@master
