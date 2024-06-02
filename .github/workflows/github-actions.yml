@@ -30,7 +30,7 @@ jobs:
                     gradle-version: '8.7'
 
             -   name: Build with Gradle
-                run: ./gradlew build -Djasypt.encryptor.password=potatowoong
+                run: ./gradlew build -Djasypt.encryptor.password=${{secrets.JASYPT_PASSWORD }}
 
             -   name: Publish Test Results
                 uses: mikepenz/action-junit-report@v4
