@@ -40,7 +40,8 @@ jobs:
                     include_passed: true
 
             -   name: ls
-                run: ls /build/libs
+                run: ls ./build/libs
+
     deploy:
         runs-on: ubuntu-latest
 
