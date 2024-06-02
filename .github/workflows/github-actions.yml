@@ -33,7 +33,7 @@ jobs:
                 run: ./gradlew build -Djasypt.encryptor.password=${{secrets.JASYPT_PASSWORD }}
 
             -   name: Upload Build File
-                uses: actions/upload-artifact@v3
+                uses: actions/upload-artifact@v4
                 with:
                     name: potato-mall-jar
                     path: ./build/libs/potato-mall.jar
@@ -50,9 +50,31 @@ jobs:
 
         steps:
             -   name: Download Build File
-                uses: actions/download-artifact@v3
+                uses: actions/download-artifact@v4
                 with:
                     name: potato-mall-jar
 
-            -   name: ls
-                run: ls
+            -   name: Get Github Action IP
+                id: ip
+                uses: haythem/public-ip@v1.2
+
+            -   name: Configure AWS credentials
+                uses: aws-actions/configure-aws-credentials@v1
+                with:
+                    aws-access-key-id: ${{ secrets.AWS_IAM_ACCESS_KEY }}
+                    aws-secret-access-key: ${{ secrets.AWS_IAM_SECRET_ACCESS_KEY }}
+                    aws-region: ap-northeast-2
+
+            -   name: Add Github Actions IP to Security group
+                run: |
+                    aws ec2 authorize-security-group-ingress --group-name ${{ secrets.AWS_SECURITY_GROUP_NAME }} --protocol tcp --port 22 -cidr ${{steps.ip.outputs.ipv4}}/32
+
+            -   name: Deploy jar to EC2
+                uses: appleboy/ssh-action@master
+                with:
+                    host: ${{ secrets.AWS_EC2_HOST }}
+                    username: ${{ secrets.AWS_EC2_USERNAME }}
+                    key: ${{ secrets.AWS_EC2_SSH_KEY }}
+                    rm: true
+                    source: ./potato-mall.jar
+                    target: ~/web/potato-mall.jar
