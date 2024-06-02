@@ -75,6 +75,13 @@ jobs:
                     host: ${{ secrets.AWS_EC2_HOST }}
                     username: ${{ secrets.AWS_EC2_USERNAME }}
                     key: ${{ secrets.AWS_EC2_SSH_KEY }}
-                    rm: true
                     source: ./potato-mall.jar
                     target: /web
+
+            -   name: Remove Github Actions IP from security group
+                run: |
+                    aws ec2 revoke-security-group-ingress --group-name ${{ env.AWS_SECURITY_GROUP_NAME }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+                env:
+                    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_IAM_ACCESS_KEY }}
+                    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_IAM_SECRET_ACCESS_KEY }}
+                    AWS_DEFAULT_REGION: ap-northeast-2
