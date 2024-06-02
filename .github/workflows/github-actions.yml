@@ -15,10 +15,12 @@ jobs:
             -   name: Set up cache for JDK
                 id: cache-jdk
                 uses: actions/cache@v3
-                key: ${{ runner.os }}-jdk17-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-                restore-keys: |
-                    ${{ runner.os }}-jdk17-
-
+                with:
+                    path: ~/.jabba/jdk
+                    key: ${{ runner.os }}-jdk17-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+                    restore-keys: |
+                        ${{ runner.os }}-jdk17-
+                            
             -   name: Set up JDK 17
                 if: steps.cache-jdk.outputs.cache-hit != 'true'
                 run: |
