@@ -32,19 +32,26 @@ jobs:
             -   name: Build with Gradle
                 run: ./gradlew build -Djasypt.encryptor.password=${{secrets.JASYPT_PASSWORD }}
 
+            -   name: Upload Build File
+                uses: actions/upload-artifact@v3
+                with:
+                    name: potato-mall-jar
+                    path: ./build/libs/potato-mall.jar
+
             -   name: Publish Test Results
                 uses: mikepenz/action-junit-report@v4
                 if: always()
                 with:
                     report_paths: '**/build/test-results/test/TEST-*.xml'
                     include_passed: true
-
-            -   name: ls
-                run: ls ./build/libs
-
     deploy:
         runs-on: ubuntu-latest
 
         steps:
+            -   name: Download Build File
+                uses: actions/download-artifact@v3
+                with:
+                    name: potato-mall-jar
+
             -   name: ls
-                run: ls -R
+                run: ls
