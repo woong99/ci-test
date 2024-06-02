@@ -28,7 +28,7 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-gradle
             -   name: Build with Gradle
-                run: ./gradlew build
+                run: ./gradlew build -Djasypt.encryptor.password=potatowoong
 
             -   name: Run tests
-                run: ./gradlew test
+                run: ./gradlew test -Djasypt.encryptor.password=potatowoong
