@@ -31,7 +31,7 @@ jobs:
                 run: ./gradlew build -Djasypt.encryptor.password=potatowoong
 
             -   name: Publish Test Results
-                uses: EnricoMi/publish-unit-test-result-action@v2
+                uses: mikepenz/action-junit-report@v4
                 if: always()
                 with:
-                    files: '**/build/test-results/test/TEST-*.xml'
+                    report_paths: '**/build/test-results/test/TEST-*.xml'
