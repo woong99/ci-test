@@ -77,4 +77,4 @@ jobs:
                     key: ${{ secrets.AWS_EC2_SSH_KEY }}
                     rm: true
                     source: ./potato-mall.jar
-                    target: /web/potato-mall.jar
+                    target: /web
