@@ -23,13 +23,10 @@ jobs:
                 run: java -version
 
             -   name: Set up Gradle
-                uses: gradle/gradle-build-action@v3
+                uses: gradle/actions/setup-gradle@v3
                 with:
-                    arguments: build -Djasypt.encryptor.password=potatowoong
-                    cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop' }}
+                    gradle-version: '8.7'
+                    distribution: 'wrapper'
 
-#            -   name: Build with Gradle
-#                run: ./gradlew build -Djasypt.encryptor.password=potatowoong
-#
-#            -   name: Run tests
-#                run: ./gradlew test -Djasypt.encryptor.password=potatowoong
+            -   name: Build with Gradle
+                run: ./gradlew build -Djasypt.encryptor.password=potatowoong
