@@ -40,11 +40,14 @@ jobs:
             -   name: ls
                 run: ls
 
+            -   name: Package build file
+                run: tar -czf build.tar.gz build
+
             -   name: Upload Build File
                 uses: actions/upload-artifact@v4
                 with:
                     name: build
-                    path: build
+                    path: build.tar.gz
 
     deploy:
         runs-on: ubuntu-latest
@@ -74,13 +77,13 @@ jobs:
                     aws ec2 authorize-security-group-ingress --group-name ${{ secrets.AWS_SECURITY_GROUP_NAME }} --protocol tcp --port 22 --cidr ${{steps.public_ip.outputs.public_ip}}/32
 
             -   name: ls
-                run: ls ../
+                run: ls ./
 
-            -   name: mkdir
-                run: mkdir ../build
-
-            -   name: cp
-                run: cp -r * ../build
+            #            -   name: mkdir
+            #                run: mkdir ../build
+            #
+            #            -   name: cp
+            #                run: cp -r * ../build
 
             -   name: ls
                 run: ls ../
@@ -91,7 +94,7 @@ jobs:
                     host: ${{ secrets.AWS_EC2_HOST }}
                     username: ${{ secrets.AWS_EC2_USERNAME }}
                     key: ${{ secrets.AWS_EC2_SSH_KEY }}
-                    source: ../build/
+                    source: build.tar.gz
                     target: /front
 
             -   name: Remove Github Actions IP from security group
