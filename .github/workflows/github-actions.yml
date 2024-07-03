@@ -60,7 +60,7 @@ jobs:
                 run: |
                     PUBLIC_IP=$(curl -s https://api.ipify.org)
                     echo "Public IP: $PUBLIC_IP"
-                    echo "::set-output name=public_ip::$PUBLIC_IP"
+                    echo "public_ip=$PUBLIC_IP" >> $GITHUB_OUTPUT
 
             -   name: Configure AWS credentials
                 uses: aws-actions/configure-aws-credentials@v4
