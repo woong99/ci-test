@@ -1,0 +1,53 @@
+import React from 'react';
+import { FaSearch } from 'react-icons/fa';
+
+const MobileSearchBar = ({
+    handleSearchFocus,
+    searchWord,
+    setSearchWord,
+    handleEnter,
+    handleSearch,
+    setIsComposing,
+    showSuggestions,
+    suggestions,
+    handleSuggestion,
+    search,
+}) => {
+    return (
+        <div className="md:hidden px-6 mb-5 relative">
+            <input
+                type="text"
+                placeholder="찾고 싶은 상품을 검색해보세요!"
+                className="border border-gray-300 rounded-md w-full focus:outline-none focus:border-gray-500 focus:shadow-none focus:ring-0"
+                onFocus={() => handleSearchFocus(true)}
+                onBlur={() => handleSearchFocus(false)}
+                onChange={(e) => setSearchWord(e.target.value)}
+                onCompositionStart={() => setIsComposing(true)}
+                onCompositionEnd={() => setIsComposing(false)}
+                onKeyDown={handleEnter}
+                onKeyUp={handleSearch}
+                value={searchWord}
+            />
+            <FaSearch
+                className="absolute right-6 top-0 mt-3 mr-3 cursor-pointer"
+                onClick={search}
+            />
+            {showSuggestions && (
+                <ul
+                    className="absolute   bg-white text-gray-500 border z-50 rounded-md"
+                    style={{ width: 'calc(100% - 3rem)' }}>
+                    {suggestions?.map((suggestion) => (
+                        <li
+                            key={suggestion.name}
+                            className={'px-4 py-2 hover:bg-gray-100 cursor-pointer'}
+                            onClick={() => handleSuggestion(suggestion.name)}>
+                            {suggestion.name}
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+};
+
+export default MobileSearchBar;

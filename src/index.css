@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-transition: background-color 9999s ease-out;
+  -webkit-text-fill-color: #fff !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-transition: background-color 9999s ease-out;
+  -webkit-text-fill-color: #000 !important;
+}
+
+/* react-select 다크모드 CSS S */
+.react-select-dark__control {
+  border-radius: 0.5rem !important;
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity)) !important;
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity)) !important;
+}
+
+.react-select-dark__single-value {
+  color: white !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
+.react-select-dark__input {
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0) !important;
+  color: white !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
+.react-select-dark__placeholder {
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0) !important;
+  color: #9CA3AF !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
+.react-select-dark__menu {
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity)) !important;
+}
+
+.react-select-dark__option {
+  color: white !important;
+}
+
+/* react-select 다크모드 CSS E */
+
+/*react-quill-editor CSS S */
+.ql-editor {
+  color: white !important;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity)) !important;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity)) !important;
+}
+
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  color: #9CA3AF !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  font-style: normal !important;
+}
+
+.ql-picker-label {
+  color: white !important;
+}
+
+.ql-stroke {
+  stroke: white !important;
+}
+
+.ql-active .ql-stroke {
+  stroke: black !important;
+}
+
+.ql-picker-options {
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity)) !important;
+  color: white !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: center !important;
+}
+
+.ql-picker-item:hover {
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity)) !important;
+  color: white !important;
+}
+
+.ql-selected {
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity)) !important;
+  color: white !important;
+}
+
+/*react-quill-editor CSS E */
+
+/* User Page CSS S */
+.work-sans {
+  font-family: 'Work Sans', sans-serif;
+}
+
+#menu-toggle:checked + #menu {
+  display: block;
+}
+
+.hover\:grow {
+  transition: all 0.3s;
+  transform: scale(1);
+}
+
+.hover\:grow:hover {
+  transform: scale(1.02);
+}
+
+.carousel-open:checked + .carousel-item {
+  position: static;
+  opacity: 100;
+}
+
+.carousel-item {
+  -webkit-transition: opacity 0.6s ease-out;
+  transition: opacity 0.6s ease-out;
+}
+
+#carousel-1:checked ~ .control-1,
+#carousel-2:checked ~ .control-2,
+#carousel-3:checked ~ .control-3 {
+  display: block;
+}
+
+.carousel-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+}
+
+#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
+#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+  color: #000;
+}
+
+.swiper-pagination-bullet {
+  background-color: black;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* User Page CSS E */
+
+/* React Paginate S */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+/* React Paginate E */
+
+/* React skeleton S */
+@-webkit-keyframes skeleton-gradient {
+  0% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+
+  50% {
+    background-color: rgba(165, 165, 165, 0.3);
+  }
+
+  100% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+}
+
+@keyframes skeleton-gradient {
+  0% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+
+  50% {
+    background-color: rgba(165, 165, 165, 0.3);
+  }
+
+  100% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+}
+
+/*해당되는 컴포넌트에 적용*/
+.react-loading-skeleton {
+  -webkit-animation: skeleton-gradient 0.5s infinite ease-in-out;
+  animation: skeleton-gradient 0.5s infinite ease-in-out;
+}
+
+/* React skeleton E */
