@@ -37,6 +37,9 @@ jobs:
             -   name: react build
                 run: npm run build
 
+            -   name: ls
+                run: ls
+
             -   name: Upload Build File
                 uses: actions/upload-artifact@v4
                 with:
