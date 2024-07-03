@@ -73,6 +73,15 @@ jobs:
             -   name: ls
                 run: ls ../
 
+            -   name: mkdir
+                run: mkdir ../build
+                
+            -   name: cp
+                run: cp -r * ../build
+
+            -   name: ls
+                run: ls ../
+
             -   name: Deploy build file to EC2
                 uses: appleboy/scp-action@master
                 with:
