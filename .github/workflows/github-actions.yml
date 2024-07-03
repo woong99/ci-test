@@ -7,7 +7,7 @@ on:
 
 jobs:
     build:
-        name: react build & deploy
+        name: build
         runs-on: ubuntu-latest
 
         steps:
@@ -71,7 +71,7 @@ jobs:
                     aws ec2 authorize-security-group-ingress --group-name ${{ secrets.AWS_SECURITY_GROUP_NAME }} --protocol tcp --port 22 --cidr ${{steps.public_ip.outputs.public_ip}}/32
 
             -   name: ls
-                run: ls ./
+                run: ls ../
 
             -   name: Deploy build file to EC2
                 uses: appleboy/scp-action@master
@@ -79,7 +79,7 @@ jobs:
                     host: ${{ secrets.AWS_EC2_HOST }}
                     username: ${{ secrets.AWS_EC2_USERNAME }}
                     key: ${{ secrets.AWS_EC2_SSH_KEY }}
-                    source: build
+                    source: ../build
                     target: /front
 
             -   name: Remove Github Actions IP from security group
