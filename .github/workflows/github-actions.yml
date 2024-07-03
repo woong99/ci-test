@@ -76,7 +76,7 @@ jobs:
                     host: ${{ secrets.AWS_EC2_HOST }}
                     username: ${{ secrets.AWS_EC2_USERNAME }}
                     key: ${{ secrets.AWS_EC2_SSH_KEY }}
-                    source: ./build
+                    source: ./build/
                     target: /front
 
             -   name: Remove Github Actions IP from security group
