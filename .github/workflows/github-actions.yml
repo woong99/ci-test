@@ -14,20 +14,20 @@ jobs:
             -   name: checkout Github Action
                 uses: actions/checkout@v3
 
-            -   name: Get npm cache directory
-                id: npm-cache-dir
-                run: |
-                    echo "::set-output name=dir::$(npm config get cache)"
+            -   name: Setup Node.js
+                uses: actions/setup-node@v3
 
-            -   uses: actions/cache@v3
-                id: npm-cache
+            -   name: Cache dependencies
+                id: cache
+                uses: actions/cache@v3
                 with:
-                    path: ${{ steps.npm-cache-dir.outputs.dir }}
+                    path: '**/node_modules'
                     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                     restore-keys: |
                         ${{ runner.os }}-node-
 
-            -   name: install npm dependencies
+            -   name: Install Dependencies
+                if: steps.cache.outputs.cache-hit != 'true'
                 run: npm install
 
             -   name: Setting .env
